@@ -170,7 +170,7 @@ export function ContactForm({
                 <FieldLabel htmlFor={`${id}-value`}>Deal value</FieldLabel>
                 <InputGroup>
                   <InputGroupAddon>
-                    <InputGroupText>$</InputGroupText>
+                    <InputGroupText>₹</InputGroupText>
                   </InputGroupAddon>
                   <InputGroupInput
                     {...field}

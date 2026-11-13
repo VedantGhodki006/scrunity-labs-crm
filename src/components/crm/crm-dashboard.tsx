@@ -96,13 +96,13 @@ const filterItems = [
   ...STATUSES.map((value) => ({ value, label: STATUS_LABELS[value] })),
 ]
 
-const currency = new Intl.NumberFormat("en-US", {
+const currency = new Intl.NumberFormat("en-IN", {
   style: "currency",
-  currency: "USD",
+  currency: "INR",
   maximumFractionDigits: 0,
 })
 
-const dateFormat = new Intl.DateTimeFormat("en-US", {
+const dateFormat = new Intl.DateTimeFormat("en-IN", {
   month: "short",
   day: "numeric",
   year: "numeric",
