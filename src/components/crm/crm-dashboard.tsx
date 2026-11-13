@@ -2,11 +2,13 @@
 
 import { startTransition, useOptimistic, useState } from "react"
 import {
+  LogOutIcon,
   MoreHorizontalIcon,
   PencilIcon,
   PlusIcon,
   SearchIcon,
   Trash2Icon,
+  UserIcon,
   UsersIcon,
 } from "lucide-react"
 import { toast } from "sonner"
@@ -33,7 +35,9 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -66,6 +70,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { createContact, deleteContact, updateContact } from "@/app/actions"
+import { signOut } from "@/app/auth/actions"
 import {
   STATUS_LABELS,
   STATUSES,
@@ -118,7 +123,13 @@ function applyChange(contacts: Contact[], change: OptimisticChange) {
     : [change.contact, ...contacts]
 }
 
-export function CrmDashboard({ contacts: serverContacts }: { contacts: Contact[] }) {
+export function CrmDashboard({
+  contacts: serverContacts,
+  userEmail,
+}: {
+  contacts: Contact[]
+  userEmail: string
+}) {
   const [query, setQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<Status | "all">("all")
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -220,10 +231,31 @@ export function CrmDashboard({ contacts: serverContacts }: { contacts: Contact[]
             Track your leads, prospects and customers in one place.
           </p>
         </div>
-        <Button onClick={openAdd}>
-          <PlusIcon data-icon="inline-start" />
-          Add contact
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button onClick={openAdd}>
+            <PlusIcon data-icon="inline-start" />
+            Add contact
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <Button variant="outline" size="icon" aria-label="Account menu" />
+              }
+            >
+              <UserIcon />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-48">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel className="truncate">{userEmail}</DropdownMenuLabel>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => startTransition(() => signOut())}>
+                <LogOutIcon />
+                Sign out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </header>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">

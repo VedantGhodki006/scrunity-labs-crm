@@ -38,7 +38,7 @@ export function toRow(input: ContactInput) {
 export async function getContacts(): Promise<Contact[]> {
   // Contacts change at any time, so always read them at request time.
   await connection()
-  const { data, error } = await createSupabaseClient()
+  const { data, error } = await (await createSupabaseClient())
     .from("contacts")
     .select("*")
     .order("created_at", { ascending: false })
