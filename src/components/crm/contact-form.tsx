@@ -191,11 +191,11 @@ export function ContactForm({
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={`${id}-notes`}>Notes</FieldLabel>
+              <FieldLabel htmlFor={`${id}-notes`}>Notes / next step</FieldLabel>
               <Textarea
                 {...field}
                 id={`${id}-notes`}
-                placeholder="How you met, next steps, anything worth remembering…"
+                placeholder="e.g. Follow up call on 20 Nov — send pricing deck"
                 className="min-h-24"
                 aria-invalid={fieldState.invalid}
               />

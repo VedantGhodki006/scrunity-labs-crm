@@ -146,7 +146,7 @@ export function CrmDashboard({
     (c) =>
       (statusFilter === "all" || c.status === statusFilter) &&
       (!q ||
-        [c.name, c.email, c.company, c.phone].some((v) =>
+        [c.name, c.email, c.company, c.phone, c.notes].some((v) =>
           v.toLowerCase().includes(q)
         ))
   )
@@ -335,6 +335,7 @@ export function CrmDashboard({
                   <TableHead>Company</TableHead>
                   <TableHead>Phone</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead>Notes / next step</TableHead>
                   <TableHead className="text-right">Deal value</TableHead>
                   <TableHead>Added</TableHead>
                   <TableHead className="w-10">
@@ -362,6 +363,16 @@ export function CrmDashboard({
                       <Badge variant={STATUS_VARIANTS[contact.status]}>
                         {STATUS_LABELS[contact.status]}
                       </Badge>
+                    </TableCell>
+                    <TableCell className="max-w-xs min-w-48 whitespace-normal">
+                      {contact.notes ? (
+                        // Long notes are clamped; hover shows the full text.
+                        <p className="line-clamp-2" title={contact.notes}>
+                          {contact.notes}
+                        </p>
+                      ) : (
+                        "—"
+                      )}
                     </TableCell>
                     <TableCell className="text-right tabular-nums">
                       {contact.value ? currency.format(contact.value) : "—"}
