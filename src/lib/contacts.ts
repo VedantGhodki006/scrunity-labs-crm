@@ -12,7 +12,14 @@ export const STATUS_LABELS: Record<Status, string> = {
 
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters."),
-  email: z.email("Enter a valid email address."),
+  // Optional, but must be a valid address when given.
+  email: z
+    .string()
+    .trim()
+    .refine(
+      (value) => value === "" || z.email().safeParse(value).success,
+      "Enter a valid email address."
+    ),
   phone: z
     .string()
     .trim()

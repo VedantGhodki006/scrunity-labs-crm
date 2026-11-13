@@ -352,7 +352,9 @@ export function CrmDashboard({
                   >
                     <TableCell>
                       <div className="font-medium">{contact.name}</div>
-                      <div className="text-muted-foreground">{contact.email}</div>
+                      {contact.email && (
+                        <div className="text-muted-foreground">{contact.email}</div>
+                      )}
                     </TableCell>
                     <TableCell>{contact.company || "—"}</TableCell>
                     <TableCell>{contact.phone || "—"}</TableCell>

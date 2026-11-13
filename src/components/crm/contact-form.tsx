@@ -81,7 +81,7 @@ export function ContactForm({
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={`${id}-email`}>Email *</FieldLabel>
+                <FieldLabel htmlFor={`${id}-email`}>Email</FieldLabel>
                 <Input
                   {...field}
                   id={`${id}-email`}
